@@ -1,41 +1,37 @@
-class Person {
-  constructor(name, pictureAddress, responses) {
-    this.name = name;
-    this.pictureAddress = pictureAddress;
-    this.responses = responses;
-  }
-}
 
 class FriendMgr {
-  constructor(){
+  constructor() {
     this.people = [];
   }
 
-  findFriend(me){
-      var absoluteDiff = 50;
-      var friend;
-      for(var i = 0; i < people.length; i++){
-        var diff = getAbsoluteDiff(people[i].responses, me.responses);
-        if(diff < absoluteDiff){
+  findFriend(me) {
+    var absoluteDiff = 50;
+    var friend = {};
+    for (var i = 0; i < this.people.length; i++) {
+      if (this.people[i].name != me.name) {
+        var diff = this.getAbsoluteDiff(this.people[i].responses, me.responses);
+        if (diff < absoluteDiff) {
           absoluteDiff = diff;
-          friend = people[i];
+          friend = this.people[i];
         }
       }
-      return friend;
+    }
+    return friend;
   }
 
-  getAbsoluteDiff(res1, res2){
+  getAbsoluteDiff(res1, res2) {
     var absSum = 0;
-    for(var i=0; i<res1.length; i++){
-      absSum += Math.abs(res1[i]-res2[i]);
+    for (var i = 0; i < res1.length; i++) {
+      absSum += Math.abs(res1[i] - res2[i]);
     }
     return absSum;
   }
 
-  addPerson(person){
+  addPerson(person) {
     this.people.push(person);
   }
 
 }
 var friendMgr = new FriendMgr();
 
+module.exports = friendMgr;

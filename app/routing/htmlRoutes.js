@@ -10,10 +10,8 @@ htmlRouter.get("/addProfile", function (req, res) {
   res.sendFile(path.join(__dirname, "../public/addPerson.html"));
 });
 
-htmlRouter.get("/friends", function (req, res) {
+htmlRouter.get("/friend", function (req, res) {
   res.sendFile(path.join(__dirname, "../public/viewFriend.html"));
 });
-
-
 
 module.exports = htmlRouter;

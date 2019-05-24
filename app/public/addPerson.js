@@ -16,11 +16,10 @@ var questions = ["Do you like dogs?",
 $(document).ready(function () {
   //create cards with questionaire
 
-  questions.forEach(question => {
-    var card = createCard(question);
+  questions.forEach((question, index) => {
+    var card = createCard(question, index);
     $('#questionsDeck').append(card);
   });
-
 
 });
 
@@ -43,7 +42,7 @@ function createCard(question, index) {
     class: 'font-weight-bold blue-text mr-2 mt-1',
   }).append($('<i>', { class: 'fas fa-thumbs-down' }));
 
-  var form = $('<form>', { class: 'range-field w-25' });
+  //var form = $('<form>', { class: 'range-field w-25' });
   var input = $('<input>', {
     class: 'border-0',
     id: 'response' + index,
@@ -51,14 +50,15 @@ function createCard(question, index) {
     min: '0',
     max: '5',
     step: '1'
+
   });
 
-  form.append(input);
+  //form.append(input);
 
   var thumbsup = $('<span>', { class: 'font-weight-bold blue-text ml-2 mt-1' }).append($('<i>', { class: 'fas fa-thumbs-up' }));
 
   cardtext.append(thumbsdown);
-  cardtext.append(form);
+  cardtext.append(input);
   cardtext.append(thumbsup);
 
   cardbody.append(cardtitle);
@@ -69,24 +69,43 @@ function createCard(question, index) {
   return card;
 }
 
-$("#add-btn").on("click", function (event) {
+function addPerson() {
   event.preventDefault();
+  var responses = [];
+  for (var i = 0; i < questions.length; i++) {
+    responses.push($("#response" + i).val());
+  }
   var newPerson = {
     name: $("#name").val().trim(),
     photo: $("#photoAddress").val().trim(),
-    response: [$("#res1").val().trim()]
+    responses: responses
   };
 
   console.log(newPerson);
 
   $.post("/api/people", newPerson)
     .then(function (data) {
-     alert("Person Added");
+      console.log("Person Added: " + JSON.stringify(data));
+      $.post("/api/findFriend", newPerson).then(function (friend) {
+        console.log("Friend:" + JSON.stringify(friend));
+        clearForm();
+        $('#title').text("Your soul sibling is...");
+        if (friend.name) {
+          $('#friend-image').attr("src", friend.photo);
+          $('#friend-name').text(friend.name);
+        }else{
+          $('#friend-name').text("No friends to show");
+        }
+        $('#card-friend').show();
+      });
     });
-    clearForm();
-});
+}
 
 function clearForm() {
-  $("#name").val("");
-  $("#photoAddress").val("");
+  $('#input-name').hide();
+  $('#input-photo').hide();
+  $('#questionsDeck').empty();
+  $("#name").hide();
+  $("#photoAddress").hide();
+  $("#add-btn").hide();
 }

@@ -1,42 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Add Person</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="addPerson.js"></script>
 
 </head>
+
 <body>
-  <h1>Tell us about yourself</h1>
 
-  <form method="POST" role="form">
+  <form id="input-form" method="POST" role="form">
 
-  <div class="input-group flex-nowrap">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="addon-wrapping">Name:</span>
+    <div class="jumbotron">
+      <h1 class="display-4">Friend Finder!</h1>
+      <p class="lead" id="title">Tell us about yourself</p>
+      <hr class="my-4">
+
+      <div class="input-group flex-nowrap" id="input-name">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="addon-wrapping">Name:</span>
+        </div>
+        <input type="text" class="form-control" id="name" placeholder="Name" aria-label="name"
+          aria-describedby="addon-wrapping" required>
       </div>
-      <input type="text" class="form-control" id="name" placeholder="Name" aria-label="name" aria-describedby="addon-wrapping" required>
-    </div>
-    <div class="input-group flex-nowrap">
+      <div class="input-group flex-nowrap" id="input-photo">
         <div class="input-group-prepend">
           <span class="input-group-text" id="addon-wrapping">Link to photo:</span>
         </div>
-        <input type="text" class="form-control" id="photoAddress" aria-label="photoAddress" aria-describedby="addon-wrapping">
+        <input type="text" class="form-control" id="photoAddress" aria-label="photoAddress"
+          aria-describedby="addon-wrapping">
       </div>
-  
-      <hr>
+    </div>
 
-      <div class="card-columns" id="questionsDeck">
-          
+
+    <div class="card friend-result" id="card-friend" style="width: 18rem; display: none;">
+      <img src="" id="friend-image" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title" id="friend-name"></h5>
+
+        <a href="/" class="btn btn-primary">Home</a>
       </div>
-        <button type="submit" class="btn btn-primary btn-md" id="add-btn"> <i class="fas fa-check"> Submit </i></button>
-        </form>
-      
+    </div>
+
+    <div class="card-columns" id="questionsDeck">
+
+    </div>
+  </form>
+
+  <button type="submit" class="btn btn-primary btn-md" id="add-btn" onclick="addPerson()"> <i class="fas fa-check">
+      Submit </i></button>
+
+
 </body>
+
 </html>
 ​
