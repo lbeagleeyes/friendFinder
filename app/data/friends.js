@@ -1,3 +1,4 @@
+var Person = require("../data/person.js");
 
 class FriendMgr {
   constructor() {
@@ -33,5 +34,9 @@ class FriendMgr {
 
 }
 var friendMgr = new FriendMgr();
+
+friendMgr.addPerson(new Person("Bugs Bunny","http://lorempixel.com/400/200/",[5,0,5,5,0,2,5,2,5,2,4]));
+
+friendMgr.addPerson(new Person("Sam Yosemite","http://lorempixel.com/400/200/",[5,1,0,1,3,2,3,0,5,5,4]));
 
 module.exports = friendMgr;
